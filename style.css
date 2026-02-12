@@ -1,0 +1,194 @@
+/* --- custom variants --- */
+:root {
+  --primary: #2b2daa;
+  --primary-hover: #1f238f;
+  --bg: #f0f2f5;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --success: #22c55e;
+  --success-hover: #15803d;
+  --danger: #ef4444;
+  --danger-hover: #b91c1c;
+  --neutral: #4c51e0;
+  --neutral-hover: #373ccf;
+  --border: #e2e8f0;
+}
+
+/* --- DARK MODE THEME --- */
+.dark-theme {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text: #f8fafc;
+  --border: #334155;
+  --primary: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 20px;
+  transition: background 0.3s ease;
+}
+
+/* --- Layout --- */
+.dashboard-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+h1 { font-size: 1.75rem; color: var(--primary); }
+
+.search-bar input {
+  width: 320px;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 25px;
+  align-items: start;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+/* --- Balance & Stats --- */
+.balance-card { text-align: center; }
+#balance { font-size: 2rem; margin: 10px 0; }
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--border);
+}
+.money { font-weight: bold; }
+.plus { color: var(--success); }
+.minus { color: var(--danger); }
+
+/* --- PROGRESS BARS (Unified) --- */
+.goal-container, .savings-progress-container {
+  margin: 15px 0;
+  width: 100%;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px; /* Increased height for visibility */
+  background: #e2e8f0; /* Visible grey track */
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dark mode specific track */
+.dark-theme .progress-bar {
+  background: #334155;
+}
+
+#progress-fill, #savings-fill {
+  height: 100%;
+  width: 0%; /* JS will update this */
+  transition: width 0.6s cubic-bezier(0.1, 0.4, 0.4, 1);
+}
+
+#progress-fill { background: var(--success); }
+#savings-fill { background: var(--primary); }
+
+/* --- Forms & Inputs --- */
+.input-group { margin-bottom: 1.2rem; }
+input, select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--text);
+}
+
+.goal-setting {
+    display: flex;
+    gap: 5px; /* Tighter gap for multiple buttons */
+}
+
+.goal-setting button {
+    flex: 0 0 45px; /* Don't let buttons shrink or grow */
+    padding: 12px 0;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#submit { background: var(--primary); color: white; width: 100%; }
+#set-goal-btn { background: var(--primary); color: white; width: auto; }
+.theme-btn { background: transparent; color: var(--text); font-size: 1.2rem; width: auto; }
+
+/* --- History List --- */
+.list { list-style: none; max-height: 400px; overflow-y: auto; }
+.list li {
+  background: var(--bg);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  border-left: 5px solid #cbd5e1;
+}
+.list li.plus { border-left-color: var(--success); }
+.list li.minus { border-left-color: var(--danger); }
+
+/* --- Responsive & Print --- */
+@media (max-width: 900px) {
+  .main-content { grid-template-columns: 1fr; }
+  .search-bar input { width: 100%; }
+}
+
+@media print {
+    header, .form-container, .filter-buttons, .action-buttons, .search-bar, .savings-card h3, .goal-setting {
+        display: none !important;
+    }
+    .main-content { display: block; }
+    .card { box-shadow: none; border: 1px solid #eee; }
+}

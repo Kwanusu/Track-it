@@ -1,88 +1,57 @@
-# Expense Tracker (Vanilla JS)
+# README: Modern Expense Tracker
 
-A sleek, lightweight expense tracking application built with Vanilla JavaScript, CSS3, and HTML5. This project features real-time balance updates, transaction filtering, and data persistence using the browser's LocalStorage.
+## Project Overview
 
-## Features
+This is a lightweight, client-side financial management dashboard built with a focus on modularity and user experience. It allows users to track their liquidity while maintaining strict budgeting goals through visual feedback.
 
-* **Real-time Calculations:** Automatically calculates Total Balance, Income, and Expenses.
-* **Monthly Spending Limit:** Set a custom budget and monitor progress with a dynamic, color-coded progress bar.
-* **Savings Goal Management:** Dedicated section to track savings progress with the ability to deposit from or withdraw to your main wallet.
-* **Visual Data Overview:** Integrated Chart.js doughnut chart to visualize spending by category.
-* **Data Persistence:** Uses `localStorage` to ensure your data and theme settings persist after page refreshes.
-* **Theme Support:** Dark and Light mode toggle with automatic persistence.
-* **Dynamic Filtering:** Filter transactions by "Income," "Expense," or view "All."
-* **Live Search:** Search through your transaction history by description in real-time.
-* **Responsive Design:** Clean, modern UI designed for both mobile and desktop use.
-* **Report Generation:** Built-in print functionality to generate a physical or PDF report of your current dashboard.
+### Key Design Choices
+
+* **Modular Architecture:** The JavaScript is separated into distinct functional areas (Theme, Calculation, UI Rendering, Event Handlers). This ensures that a change in the calculation logic (like how savings affect the balance) doesn't break the UI rendering.
+* **Single Source of Truth:** The `transactions` array is the primary state. All UI elements—including the balance, the doughnut chart, and the progress bars—are re-rendered from this array whenever a change occurs, ensuring data consistency.
+* **Accessibility (A11y) Integration:** We utilized ARIA roles (`progressbar`, `status`) and semantic HTML to ensure the dashboard is usable by individuals relying on assistive technologies.
+* **Local Persistence:** By using `localStorage`, the app provides a "faux-database" experience, allowing users to return to their data without needing a backend server.
+* **Visual Psychology:** The spending progress bar uses a traffic-light color system (Green < 50%, Amber < 80%, Red > 80%) to subconsciously guide user spending habits.
 
 ---
 
-## Installation and Setup
+## Setup Instructions
 
-Follow these steps to get a local copy up and running:
+### 1. Prerequisites
 
-### 1. Clone the Repository
+You only need a modern web browser (Chrome, Firefox, Edge, or Safari).
 
-Open your terminal and run:
+### 2. Local Installation
 
+1. **Clone the Repository:**
 ```bash
 git clone https://github.com/Kwanusu/finance.git
 
 ```
 
-### 2. Navigate to the Directory
-
+2. **Navigate to Folder:**
 ```bash
-cd expense-tracker
+cd finance
 
 ```
 
-### 3. Run the Project
+### 3. Running the App
 
-Since this project uses pure frontend technologies, you do not need to install any dependencies. Simply open the `index.html` file in your preferred browser:
-
-* **Option A:** Right-click `index.html` and select **Open with Browser**.
-* **Option B (Recommended):** Use the **VS Code Live Server** extension for a better development experience.
+* **Direct Open:** Double-click `index.html` to view the app.
+* **Live Server (Recommended):** If using VS Code, right-click `index.html` and select **"Open with Live Server"** to enable real-time updates as you edit the code.
 
 ---
 
-## Project Structure
+# Grading Rubric for Learners
 
-```text
-├── index.html      # Main structure and UI
-├── style.css       # Custom styling, variables, and layout
-├── script.js       # Modularized application logic and state management
-└── README.md       # Project documentation
+This rubric defines the criteria for evaluating the implementation of the Expense Tracker.
 
-```
-
----
-
-## How to Use
-
-1. **Set Goals:** Use the Spending Limit and Savings Goal inputs to define your monthly targets.
-2. **Add Transaction:** Enter a description, amount, and category. Use positive numbers for income and negative numbers for expenses.
-3. **Manage Savings:** Use the Piggy Bank icon to move funds to savings, or the Wallet icon to withdraw savings back to your main balance.
-4. **Edit and Delete:** Use the action buttons next to each transaction in the history list to modify or remove records.
-5. **New Month Reset:** Use the Reset Month button to clear current income and expenses while preserving your long-term savings data.
-6. **Search and Filter:** Use the search bar or category filters to drill down into specific transaction data.
-
----
-
-## Technical Modularization
-
-The JavaScript logic is organized into several key modules for maintainability:
-
-* **Global State:** Manages the transaction array and Chart.js instance.
-* **Theme Engine:** Handles the logic for switching and saving light/dark modes.
-* **Calculations:** Pure functions for processing totals for income, expenses, and savings.
-* **UI Rendering:** A centralized function that updates the DOM, charts, and progress bars.
-* **Event Handlers:** Specific logic for handling user interactions like saving, editing, and resetting data.
-
----
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+| Criteria | Satisfactory (Pass) | Excellent (Distinction) |
+| --- | --- | --- |
+| **Logic & Math** | Correctly calculates balance, income, and expenses from the array. | Implements complex logic for savings withdrawals and "limit exceeded" alerts. |
+| **Code Structure** | Code is contained in a single script with basic functions. | Code is fully modularized with clear separation of concerns and pure functions. |
+| **Data Persistence** | Transactions are saved to and loaded from `localStorage`. | Persistence includes user preferences like Dark/Light theme and custom budget limits. |
+| **UI/UX Design** | Responsive layout that works on mobile and desktop. | Includes micro-interactions, CSS transitions, and dynamic Chart.js integration. |
+| **Accessibility** | Includes basic `alt` tags and standard HTML form labels. | Full ARIA implementation, keyboard navigability, and `aria-live` regions for dynamic updates. |
+| **Code Quality** | Minimal comments; mostly understandable variable naming. | Professional documentation, JSDoc comments, and consistent naming conventions. |
 
 ---
