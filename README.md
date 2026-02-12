@@ -26,7 +26,7 @@ Follow these steps to get a local copy up and running:
 Open your terminal and run:
 
 ```bash
-git clone https://github.com/your-username/expense-tracker.git
+git clone https://github.com/Kwanusu/finance.git
 
 ```
 
