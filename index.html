@@ -1,102 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- =========================================================
+        DOCUMENTATION
+        ---------------------------------------------------------
+        Project: Modern Expense Tracker
+        Type: Client-side Personal Finance Dashboard
+        Purpose:
+            - Track income and expenses
+            - Set monthly spending limits
+            - Manage savings goals
+            - Visualize spending using charts
+            - Print financial reports
+            - Theme toggle (light/dark)
+        
+        Tech Stack:
+            - HTML5 (Semantic Structure)
+            - CSS3 (Custom properties + responsive layout)
+            - Vanilla JavaScript (State management & logic)
+            - Chart.js (Data visualization)
+            - Font Awesome (Icons)
+        
+        SEO & Social Sharing Optimized
+        ========================================================= -->
+
     <meta charset="UTF-8">
+
+    <!-- Responsive scaling for mobile-first layout -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- ===================== SEO METADATA ===================== -->
     <title>Modern Expense Tracker | Personal Finance & Budgeting Tool</title>
+
     <meta name="title" content="Modern Expense Tracker | Personal Finance & Budgeting Tool">
     <meta name="description" content="Manage your money with ease. Track daily expenses, set monthly spending limits, and reach your savings goals with our free, secure, and modern dashboard.">
     <meta name="keywords" content="expense tracker, budget planner, personal finance, money manager, savings goal, finance dashboard">
     <meta name="author" content="Your Name/Brand">
     <meta name="robots" content="index, follow">
 
+    <!-- ===================== OPEN GRAPH (Facebook, LinkedIn) ===================== -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-domain.com/">
     <meta property="og:title" content="Modern Expense Tracker | Take Control of Your Finances">
     <meta property="og:description" content="Track spending, set limits, and save more. A simple, fast, and secure tool for your daily financial management.">
     <meta property="og:image" content="https://your-domain.com/assets/og-preview.jpg">
 
+    <!-- ===================== TWITTER CARD ===================== -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://your-domain.com/">
     <meta property="twitter:title" content="Modern Expense Tracker">
     <meta property="twitter:description" content="A lightweight and modular expense tracker for smart budgeting.">
     <meta property="twitter:image" content="https://your-domain.com/assets/twitter-card.jpg">
 
+    <!-- Favicon and theme color -->
     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="theme-color" content="#6366f1"> <link rel="stylesheet" href="style.css">
+    <meta name="theme-color" content="#6366f1"> 
+    
+    <!-- ===================== STYLES ===================== -->
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
     <div class="dashboard-wrapper">
-        <header>
-            <h1><i class="fa-solid fa-wallet"></i> Expense Tracker</h1>
+        <header role="banner">
+            <h1><i class="fa-solid fa-wallet" aria-hidden="true"></i> Expense Tracker</h1>
             
             <div class="search-bar">
-                <input type="text" id="search" placeholder="Search transactions...">
+                <input type="text" id="search" placeholder="Search transactions..." aria-label="Search through transaction history">
             </div>
-            <button id="resetMonthBtn" class="edit-btn" style="background: var(--danger); width: auto;">
-                <i class="fa-solid fa-calendar-minus"></i> Reset Month
+
+            <button id="resetMonthBtn" class="edit-btn" style="background: var(--danger); width: auto;" aria-label="Reset all monthly transactions">
+                <i class="fa-solid fa-calendar-minus" aria-hidden="true"></i> Reset Month
             </button>
 
             <div class="header-actions">
-                <button id="themeToggle" class="theme-btn">
-                    <i class="fa-solid fa-moon"></i>
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle dark and light mode">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
                 </button>
                 
-                <button id="printBtn" class="edit-btn" style="background: var(--neutral); width: auto;">
-                    <i class="fa-solid fa-print"></i> Print Report
+                <button id="printBtn" class="edit-btn" style="background: var(--neutral); width: auto;" aria-label="Print financial report">
+                    <i class="fa-solid fa-print" aria-hidden="true"></i> Print Report
                 </button>
             </div>
         </header>
 
         <main class="main-content">
-            <section class="left-panel">
+            <section class="left-panel" aria-labelledby="financial-summary-heading">
+                <h2 id="financial-summary-heading" class="sr-only" style="display:none;">Financial Summary and Entry</h2>
+                
                 <div class="card balance-card">
                     <div class="goal-container">
                         <div class="input-group" style="margin-bottom: 15px;">
-                            <label style="font-size: 0.8rem; font-weight: 600;">Monthly Spending Limit</label>
+                            <label for="spending-goal-input" style="font-size: 0.8rem; font-weight: 600;">Monthly Spending Limit</label>
                             <div class="goal-setting">
                                 <input type="number" id="spending-goal-input" placeholder="Set Limit (e.g. 10000)">
-                                <button id="set-spending-goal-btn" title="Set Limit"><i class="fa-solid fa-check"></i></button>
+                                <button id="set-spending-goal-btn" aria-label="Confirm spending limit">
+                                    <i class="fa-solid fa-check" aria-hidden="true"></i>
+                                </button>
                             </div>
                         </div>
 
                         <div class="goal-header">
                             <span>Spending Progress</span>
-                            <span id="goal-percent">0%</span>
+                            <span id="goal-percent" aria-live="polite">0%</span>
                         </div>
-                        <div class="progress-bar">
+
+                        <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="goal-percent">
                             <div id="progress-fill"></div>
                         </div>
-                        <small id="goal-remaining">Remaining: Kes. 0.00</small>
+
+                        <small id="goal-remaining" aria-live="polite">Remaining: Kes. 0.00</small>
                     </div>
 
-                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border);">
+                    <hr aria-hidden="true" style="margin: 20px 0; border: 0; border-top: 1px solid var(--border);">
                     
-                    <h3><i class="fa-solid fa-scale-balanced"></i> Your Balance</h3>
-                    <h2 id="balance">Kes. 0.00</h2>
+                    <h3><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Your Balance</h3>
+                    <h2 id="balance" aria-live="polite">Kes. 0.00</h2>
+
                     <div class="stats-row">
                         <div class="stat">
                             <span>Income</span>
-                            <p id="income" class="money plus">+Kes. 0.00</p>
+                            <p id="income" class="money plus" aria-live="polite">+Kes. 0.00</p>
                         </div>
                         <div class="stat">
                             <span>Expense</span>
-                            <p id="expense" class="money minus">-Kes. 0.00</p>
+                            <p id="expense" class="money minus" aria-live="polite">-Kes. 0.00</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="card form-container">
-                    <h3><i class="fa-solid fa-plus-circle"></i> Add Transaction</h3>
+                    <h3><i class="fa-solid fa-plus-circle" aria-hidden="true"></i> Add Transaction</h3>
+
                     <div class="input-group">
+                        <label for="desc" class="sr-only" style="display:none;">Description</label>
                         <input type="text" id="desc" placeholder="Description">
                     </div>
+
                     <div class="input-group">
+                        <label for="amount" class="sr-only" style="display:none;">Amount</label>
                         <input type="number" id="amount" placeholder="Amount">
                     </div>
+
                     <div class="input-group">
+                        <label for="category" class="sr-only" style="display:none;">Category</label>
                         <select id="category">
                             <option value="Salary">Salary</option>
                             <option value="Food">Food</option>
@@ -106,69 +157,80 @@
                             <option value="Other">Other</option>
                         </select>
                     </div>
-                    <button id="submit"><i class="fa-solid fa-save"></i> Save Transaction</button>
+
+                    <button id="submit">
+                        <i class="fa-solid fa-save" aria-hidden="true"></i> Save Transaction
+                    </button>
                 </div>
 
-                <div class="card savings-card">
-                    <h3><i class="fa-solid fa-piggy-bank"></i> Savings Goal</h3>
+                <div class="card savings-card" role="region" aria-labelledby="savings-heading">
+                    <h3 id="savings-heading"><i class="fa-solid fa-piggy-bank" aria-hidden="true"></i> Savings Goal</h3>
                     
                     <div class="input-group">
-                        <label>Set Target Goal</label>
+                        <label for="savings-target">Set Target Goal</label>
                         <div class="goal-setting">
                             <input type="number" id="savings-target" placeholder="Goal Amount">
-                            <button id="set-goal-btn" title="Save Goal"><i class="fa-solid fa-check"></i></button>
+                            <button id="set-goal-btn" aria-label="Confirm savings target">
+                                <i class="fa-solid fa-check" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label>Manage Savings</label>
+                        <label for="savings-deposit">Manage Savings</label>
                         <div class="goal-setting">
                             <input type="number" id="savings-deposit" placeholder="Amount">
-                            <button id="deposit-btn" title="Move to Savings" style="background: var(--success); color: white;">
-                                <i class="fa-solid fa-piggy-bank"></i>
+
+                            <button id="deposit-btn" aria-label="Deposit to Savings" style="background: var(--success); color: white;">
+                                <i class="fa-solid fa-piggy-bank" aria-hidden="true"></i>
                             </button>
-                            <button id="withdraw-btn" title="Withdraw to Wallet" style="background: var(--primary); color: white;">
-                                <i class="fa-solid fa-wallet"></i>
+
+                            <button id="withdraw-btn" aria-label="Withdraw from Savings to Wallet" style="background: var(--primary); color: white;">
+                                <i class="fa-solid fa-wallet" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <small style="color: gray; font-size: 0.7rem;">Use the wallet icon to move savings back to your main balance.</small>
                     </div>
 
-                    <div class="savings-progress-container">
+                    <div class="savings-progress-container" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-labelledby="savings-label">
                         <div class="goal-header">
                             <span id="savings-label">Current Progress</span>
-                            <span id="savings-percent">0%</span>
+                            <span id="savings-percent" aria-live="polite">0%</span>
                         </div>
                         <div class="progress-bar">
                             <div id="savings-fill"></div>
                         </div>
-                        <small id="savings-summary">Saved: Kes. 0.00 / Kes. 0.00</small>
+                        <small id="savings-summary" aria-live="polite">Saved: Kes. 0.00 / Kes. 0.00</small>
                     </div>
                 </div>
             </section>
 
-            <section class="right-panel card">
+            <section class="right-panel card" aria-labelledby="history-heading">
                 <div class="tabs-header">
-                    <h3><i class="fa-solid fa-chart-pie"></i> Overview & History</h3>
-                    <div class="filter-buttons">
-                        <button id="all">All</button>
-                        <button id="incomeBtn">Income</button>
-                        <button id="expenseBtn">Expenses</button>
-                    </div>
+                    <h3 id="history-heading"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Overview & History</h3>
+
+                    <nav class="filter-buttons" aria-label="Filter transactions">
+                        <button id="all" aria-pressed="true">All</button>
+                        <button id="incomeBtn" aria-pressed="false">Income</button>
+                        <button id="expenseBtn" aria-pressed="false">Expenses</button>
+                    </nav>
                 </div>
 
-                <div class="chart-container">
-                    <canvas id="expenseChart"></canvas>
+                <div class="chart-container" aria-label="Doughnut chart showing expense distribution">
+                    <canvas id="expenseChart" role="img"></canvas>
                 </div>
 
                 <div class="history-container">
-                    <ul id="list" class="list"></ul>
+                    <ul id="list" class="list" aria-live="polite" aria-label="List of transactions"></ul>
                 </div>
             </section>
         </main>
     </div>
 
+    <!-- Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Application Logic -->
     <script src="script.js"></script>
+
 </body>
 </html>
