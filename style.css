@@ -132,7 +132,7 @@ h1 { font-size: 1.75rem; color: var(--primary); }
 #savings-fill { background: var(--primary); }
 
 /* --- Forms & Inputs --- */
-.input-group { margin-bottom: 1.2rem; }
+.input-group { margin-bottom: 1.2rem; margin-top: 1.2rem; }
 input, select {
   width: 100%;
   padding: 12px;
@@ -140,6 +140,7 @@ input, select {
   border-radius: 10px;
   background: var(--card-bg);
   color: var(--text);
+  margin-top: 0.5rem;
 }
 
 .goal-setting {
@@ -159,6 +160,7 @@ button {
   font-weight: 600;
   cursor: pointer;
   transition: 0.2s;
+  margin-top: 0.3rem;
 }
 
 #submit { background: var(--primary); color: white; width: 100%; }
