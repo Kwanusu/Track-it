@@ -23,6 +23,17 @@
         
         SEO & Social Sharing Optimized
         ========================================================= -->
+        <script>
+            //script to prevent white flash/flicker on refresh when in dark mode
+            (function() {
+                const savedTheme = localStorage.getItem('theme')
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    document.documentElement.classList.add('dark')
+                }
+            })
+        </script>
 
     <meta charset="UTF-8">
 
@@ -69,11 +80,11 @@
         <header role="banner">
             <h1 class="brand-text">
                 <img src="tracker.png" width="50" height="50" class="logo" alt="Track-It">Track<span>It</span> </h1>
-            
+        
             <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="search" placeholder="Search transactions..." aria-label="Search through transaction history">
             </div>
-
             <button id="resetMonthBtn" class="edit-btn" style="background: var(--danger); width: auto;" aria-label="Reset all monthly transactions">
                 <i class="fa-solid fa-calendar-minus" aria-hidden="true"></i> Reset Month
             </button>
