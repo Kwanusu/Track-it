@@ -82,14 +82,14 @@ function renderUI(filteredTransactions = transactions) {
         li.classList.add(item.amount > 0 && item.category !== "Savings" ? 'plus' : 'minus');
 
         li.innerHTML = `
-            <div>
+            <div class='container'>
                 <strong>${item.description}</strong> <small>(${item.category})</small>
                 <br><span style="font-size: 0.7rem; color: gray;">${item.date}</span>
             </div>
             <div class="action-buttons">
                 <span class="money-display">Kes. ${Math.abs(item.amount).toFixed(2)}</span>
-                <button class="edit-btn" onclick="handleEdit(${realIndex})"><i class="fa-solid fa-pen"></i></button>
-                <button class="delete-btn" onclick="handleDelete(${realIndex})"><i class="fa-solid fa-trash"></i></button>
+                <button class="edit" onclick="handleEdit(${realIndex})"><i class="fa-solid fa-pen"></i></button>
+                <button class="delete" onclick="handleDelete(${realIndex})"><i class="fa-solid fa-trash"></i></button>
             </div>
         `;
         elements.list.appendChild(li);

@@ -1,28 +1,34 @@
-/* --- custom variants --- */
+/* =========================================================
+   TRACK-IT: MODERN FINTECH THEME
+   ========================================================= */
+
+/* --- Custom Variables (Emerald & Navy Theme) --- */
 :root {
-  --primary: #2b2daa;
-  --primary-hover: #1f238f;
-  --bg: #f0f2f5;
+  --primary: #059669;        /* Emerald Green */
+  --primary-hover: #047857;
+  --secondary: #0d9488;      /* Teal */
+  --bg: #f8fafc;             /* Slate 50 */
   --card-bg: #ffffff;
-  --text: #1e293b;
-  --success: #22c55e;
-  --success-hover: #15803d;
-  --danger: #ef4444;
-  --danger-hover: #b91c1c;
-  --neutral: #4c51e0;
-  --neutral-hover: #373ccf;
+  --text: #0f172a;           /* Dark Navy */
+  --success: #10b981;
+  --success-hover: #059669;
+  --danger: #f43f5e;
+  --danger-hover: #e11d48;
+  --neutral: #64748b;        /* Slate 500 */
+  --neutral-hover: #475569;
   --border: #e2e8f0;
 }
 
-/* --- DARK MODE THEME --- */
+/* --- Dark Mode Theme (Charcoal & Teal) --- */
 .dark-theme {
-  --bg: #0f172a;
-  --card-bg: #1e293b;
-  --text: #f8fafc;
-  --border: #334155;
-  --primary: #818cf8;
+  --bg: #0b1120;             /* Deep Charcoal/Navy */
+  --card-bg: #151f33;        /* Navy Slate */
+  --text: #f1f5f9;
+  --border: #1e293b;
+  --primary: #10b981;        /* Brighter Emerald for Dark Mode */
 }
 
+/* --- Reset & Base --- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -30,12 +36,13 @@
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   min-height: 100vh;
   padding: 20px;
-  transition: background 0.3s ease;
+  line-height: 1.5;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
 /* --- Layout --- */
@@ -44,153 +51,294 @@ body {
   margin: 0 auto;
 }
 
+/* --- Header & Branding --- */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
-h1 { font-size: 1.75rem; color: var(--primary); }
+header h1 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.025em;
+}
 
+.logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+  background: white; /* Ensures visibility if png is transparent */
+}
+
+.brand-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;          /* Extra bold for high-end feel */
+    letter-spacing: -0.04em;   /* Tight kerning for a modern look */
+    color: var(--text);        /* Dark Navy for 'Track' */
+    margin: 0;
+}
+
+.brand-text span {
+    /* Emerald to Teal Gradient */
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Adds a slight glow effect to make it pop */
+    filter: drop-shadow(0 2px 4px rgba(5, 150, 105, 0.15));
+    
+    /* Slight italic tilt for a "speed/tracking" feel (optional) */
+    font-style: italic;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+/* Ensure logo and text remain centered on mobile */
+@media (max-width: 768px) {
+    .brand-text {
+        font-size: 1.75rem;
+        justify-content: center;
+    }
+}
+/* --- Search Bar --- */
 .search-bar input {
-  width: 320px;
-  padding: 12px 20px;
-  border-radius: 25px;
+  width: 350px;
+  padding: 12px 24px;
+  border-radius: 50px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--text);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
 
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+  width: 380px;
+}
+
+/* --- Cards --- */
+.card {
+  background: var(--card-bg);
+  padding: 1.75rem;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  margin-bottom: 25px;
+}
+
+/* --- Main Dashboard Grid --- */
 .main-content {
   display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 25px;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
   align-items: start;
 }
 
-.card {
-  background: var(--card-bg);
-  padding: 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  margin-bottom: 20px;
+/* --- Stats & Balance --- */
+.balance-card {
+  text-align: center;
+  border-top: 5px solid var(--primary);
 }
 
-/* --- Balance & Stats --- */
-.balance-card { text-align: center; }
-#balance { font-size: 2rem; margin: 10px 0; }
+#balance {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 15px 0;
+  letter-spacing: -0.05em;
+}
+
+#savings-deposit {
+  margin-bottom: 1.2em;
+}
+#savings-target {
+  margin-bottom: 1.2em;
+}
+
 .stats-row {
   display: flex;
   justify-content: space-around;
-  margin-top: 15px;
-  padding-top: 15px;
+  margin-top: 20px;
+  padding-top: 20px;
   border-top: 1px solid var(--border);
 }
-.money { font-weight: bold; }
+
+.stat span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--neutral);
+}
+
+.money {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
 .plus { color: var(--success); }
 .minus { color: var(--danger); }
 
-/* --- PROGRESS BARS (Unified) --- */
-.goal-container, .savings-progress-container {
-  margin: 15px 0;
-  width: 100%;
-}
-
-.goal-header {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
+/* --- Progress Bars --- */
 .progress-bar {
   width: 100%;
-  height: 14px; /* Increased height for visibility */
-  background: #e2e8f0; /* Visible grey track */
-  border-radius: 10px;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 50px;
   overflow: hidden;
-  position: relative;
+  margin-top: 10px;
 }
 
-/* Dark mode specific track */
 .dark-theme .progress-bar {
-  background: #334155;
+  background: #1e293b;
 }
 
 #progress-fill, #savings-fill {
   height: 100%;
-  width: 0%; /* JS will update this */
-  transition: width 0.6s cubic-bezier(0.1, 0.4, 0.4, 1);
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-#progress-fill { background: var(--success); }
-#savings-fill { background: var(--primary); }
+#progress-fill { background: linear-gradient(90deg, var(--primary), var(--secondary)); }
+#savings-fill { background: linear-gradient(90deg, var(--secondary), #06b6d4); }
 
 /* --- Forms & Inputs --- */
-.input-group { margin-bottom: 1.2rem; margin-top: 1.2rem; }
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral);
+  display: block;
+  margin-bottom: 6px;
+}
+
 input, select {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 14px;
   background: var(--card-bg);
   color: var(--text);
-  margin-top: 0.5rem;
+  font-size: 1rem;
+  transition: border 0.2s;
+  margin: 1rem;
 }
 
-.goal-setting {
-    display: flex;
-    gap: 5px; /* Tighter gap for multiple buttons */
+input:focus {
+  border-color: var(--primary);
+  outline: none;
 }
 
-.goal-setting button {
-    flex: 0 0 45px; /* Don't let buttons shrink or grow */
-    padding: 12px 0;
-}
-
+/* --- Buttons --- */
 button {
-  padding: 12px;
+  padding: 14px 20px;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 14px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.2s;
-  margin-top: 0.3rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-#submit { background: var(--primary); color: white; width: 100%; }
-#set-goal-btn { background: var(--primary); color: white; width: auto; }
-.theme-btn { background: transparent; color: var(--text); font-size: 1.2rem; width: auto; }
+
+#submit {
+  background: var(--primary);
+  color: white;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+}
+
+#submit:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+}
+
+.theme-btn {
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.edit-btn {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.container {
+  margin-top: 2px;
+}
+
+.delete {
+  color: #e11d48;
+}
+
+.edit {
+  color: green;
+  font-size: 0.9rem;
+}
 
 /* --- History List --- */
-.list { list-style: none; max-height: 400px; overflow-y: auto; }
+.list {
+  list-style: none;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
 .list li {
   background: var(--bg);
-  margin-bottom: 10px;
-  padding: 15px;
-  border-radius: 12px;
+  margin-bottom: 12px;
+  padding: 18px;
+  border-radius: 16px;
   display: flex;
   justify-content: space-between;
-  border-left: 5px solid #cbd5e1;
+  align-items: center;
+  border: 1px solid var(--border);
+  transition: transform 0.2s;
 }
-.list li.plus { border-left-color: var(--success); }
-.list li.minus { border-left-color: var(--danger); }
 
-/* --- Responsive & Print --- */
+.list li:hover {
+  transform: scale(1.01);
+}
+
+.list li.plus { border-left: 6px solid var(--success); }
+.list li.minus { border-left: 6px solid var(--danger); }
+
+/* --- Responsive Layout --- */
 @media (max-width: 900px) {
   .main-content { grid-template-columns: 1fr; }
+  header { flex-direction: column; text-align: center; }
   .search-bar input { width: 100%; }
 }
 
+/* --- Print Settings --- */
 @media print {
-    header, .form-container, .filter-buttons, .action-buttons, .search-bar, .savings-card h3, .goal-setting {
-        display: none !important;
-    }
-    .main-content { display: block; }
-    .card { box-shadow: none; border: 1px solid #eee; }
+  header, .form-container, .theme-btn, #resetMonthBtn, .search-bar { display: none !important; }
+  .main-content { display: block; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
 }
